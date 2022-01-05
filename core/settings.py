@@ -2,12 +2,15 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-&p0it7ja(4#-424n45x!@#bsivno*!3f%5!$gdwo3!v7ha5h*b")
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-&p0it7ja(4#-424n45x!@#bsivno*!3f%5!$gdwo3!v7ha5h*b",
+)
 DEBUG = str(os.environ.get("DEBUG")) == "1"
 ALLOWED_HOSTS = []
 if not DEBUG:
     ALLOWED_HOSTS += [
-            os.environ.get("DJANGO_ALLOWED_HOST"),
+        os.environ.get("DJANGO_ALLOWED_HOST"),
     ]
 ALLOWED_MAILS = [
     os.environ.get("MAIL1"),
@@ -23,9 +26,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
+    "storages",
+    
     "myaccount",
 ]
 MIDDLEWARE = [
@@ -115,18 +121,39 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
+# https://personal-web-spaces.nyc3.digitaloceanspaces.com
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "web/pages/static"),
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
+
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = BASE_DIR / "media-cdn"
+from .cdn.conf import *
+# from .cdn.conf import (
+#     AWS_ACCESS_KEY_ID,
+#     AWS_SECRET_ACCESS_KEY,
+#     AWS_STORAGE_BUCKET_NAME,
+#     AWS_S3_ENDPOINT_URL,
+#     AWS_S3_OBJECT_PARAMETERS,
+#     AWS_LOCATION,
+#     DEFAULT_FILE_STORAGE,
+#     STATICFILE_STORAGE,
+# )
+
+# AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
+# AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME
+# AWS_S3_ENDPOINT_URL = AWS_S3_ENDPOINT_URL
+# AWS_S3_OBJECT_PARAMETERS = AWS_S3_OBJECT_PARAMETERS
+# AWS_LOCATION = AWS_LOCATION
+# DEFAULT_FILE_STORAGE = DEFAULT_FILE_STORAGE
+# STATICFILE_STORAGE = STATICFILE_STORAGE
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 CORS_ORIGIN_ALLOW_ALL = False
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
 EMAIL_HOST = "smtp.gmail.com"

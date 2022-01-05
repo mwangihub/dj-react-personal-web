@@ -12,5 +12,4 @@ urlpatterns = [
     path('api/', include(api_patterns)),
     re_path(r'^.*', BaseTemplateView.as_view()),
     path('favicon.ico', generic.base.RedirectView.as_view(url=staticfiles_storage.url('favicon.ico')))
-    # re_path(r'^.*', generic.TemplateView.as_view(template_name='new/build/index.html')),
 ]

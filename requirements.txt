@@ -1,5 +1,7 @@
 Django==3.2.9
 gunicorn
+django-storages
+boto3
 django-dotenv==1.4.2
 django-cors-headers==3.10.0
 django-rest-framework==0.1.0
