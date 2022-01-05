@@ -1,13 +1,8 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/django,react
-# Edit at https://www.toptal.com/developers/gitignore?templates=django,react
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
 /node_modules
 /.pnp
 .pnp.js
-
+# portfolio-web
 # testing
 /coverage
 
