@@ -5,8 +5,8 @@ from django.views import generic
 class BaseTemplateView(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         context = {'title': 'Powered by django'}
-        # return render(request, 'pages/home.html', context)
-        return render(request, 'pages/index.html', context)
+        return render(request, 'pages/home.html', context)
+        # return render(request, 'pages/index.html', context)
 
 
 class AccountTemplateView(generic.TemplateView):
