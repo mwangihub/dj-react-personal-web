@@ -1,24 +1,19 @@
-import React, { Component } from 'react'
-import { ProfileConsumer } from '../contextApi'
+import React from 'react'
 import Social from './Social';
-
-class Hero extends Component {
-
-    render() {
-        // console.log(this.props.data);
-        let data = this.props.data;
-        // const profile = data ? data.profiles[0] : {}
-        const links = data ? data.links : {}
+const Hero = ({ profile: { first_name, links, images } }) => {
+    const { profile_img } = images ? images[1] : {}
         return (
-            <section id="hero" className="d-flex flex-column justify-content-center">
+            <section id="hero" className="d-flex flex-column justify-content-center" style={{
+                backgroundImage: profile_img ? `url("${profile_img}")` : '',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'top right',
+            }}>
                 <div className="container">
-                    <h1>{data ? data.first_name : ''}</h1>
-                    <Social {...links}/>
+                    <h1>{first_name ? first_name : ''}</h1>
+                    <Social {...links} />
                 </div>
             </section>
         )
-    }
 }
-
-
-export default Hero
+export default React.memo(Hero)

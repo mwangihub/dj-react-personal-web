@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import NotFound from './notFound'
-import { ProfileConsumer } from '../contextApi';
 export default class ErrorPage extends Component {
+    refreshPage = () => {
+        window.location.reload()
+    }
     render() {
-        console.log(this.props);
         const { status, statusText, info } = this.props;
         return (
             <div className="container" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
@@ -11,7 +12,7 @@ export default class ErrorPage extends Component {
                     <h1>{status}</h1>
                     <h2>{statusText}</h2>
                     <code className="text-danger">{info}</code>
-                    {/* <a className="btn" href="index.html">Back to home</a> */}
+                    <button className="btn btn-sm mt-2 px-5" onClick={e => this.refreshPage()}>Refresh</button>
                     <NotFound />
                 </section>
             </div>

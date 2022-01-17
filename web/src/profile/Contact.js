@@ -73,8 +73,8 @@ export default class Contact extends Component {
             });
     }
     render() {
-        let data = this.props.data;
-        const profile = data ? data.profiles[0] : {}
+        const { profile: { profiles } } = this.props
+        const { address, phone, email, } = profiles ? profiles[0] : {}
         const { loading, error, sent } = this.state;
         return (
             <section id="contact" className="contact">
@@ -83,7 +83,7 @@ export default class Contact extends Component {
                         <h2>Contact</h2>
                     </div>
                     <div className="row mt-1">
-                        {contactDetails(profile.address, profile.email, profile.phone)}
+                        {contactDetails(address, email, phone)}
                         <div className="col-lg-8 mt-5 mt-lg-0">
                             <form method="POST" className="php-email-form" onSubmit={e => this.sendContactMessage(e)} action='.'>
                                 <div className="row">
@@ -111,7 +111,6 @@ export default class Contact extends Component {
                     </div>
                 </div>
             </section>
-
         )
     }
 }

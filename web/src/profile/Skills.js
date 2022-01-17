@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { ProfileConsumer } from '../contextApi';
 export default class Skills extends Component {
     render() {
         return (

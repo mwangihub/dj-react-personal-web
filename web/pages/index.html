@@ -1,237 +1,29 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
 <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <meta charset="utf-8">
-
-    <link rel="icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
-    <link rel="icon" href="/static/favicon.ico">
+    <meta name="description" content="This web site provides information concerning Peter Mwangi M.: Django fullstack web developer. Find more information concerning him including contact details" />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="{% static 'media/favicon.ico' %}" />
     <title>{{title}}</title>
-    <link href="/static/css/main.675126ae.chunk.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.1/css/boxicons.min.css" integrity="sha512-nOk7sj5T6Zi3Ond5VHhc+L4WHvRuRhV/cOcWWDl2mOyTetiIfuv56UJzD0yYhz9Kqwk1PpU0/PX5+qpX43hVWg==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" integrity="sha512-1fPmaHba3v4A7PaUsComSM4TBsrrRGs+/fv0vrzafQ+Rw+siILTiJa0NtFfvGeyY5E182SDTaF5PqP+XOHgJag==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link href="{% static 'css/main.2c7c281a.chunk.css' %}" rel="stylesheet">
 </head>
 
 <body><i class="bi bi-grid-3x3-gap-fill mobile-nav-toggle"></i>
-    <div id="root"></div>
+    <div id="root" data-domain="domain.com"></div>
     <p class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></p>
-    <script>
-        document.addEventListener('DOMContentLoaded', (function() {
-            /**
-             * Easy selector helper function
-             */
-            const select = (el, all = false) => {
-                el = el.trim()
-                if (all) {
-                    return [...document.querySelectorAll(el)]
-                } else {
-                    return document.querySelector(el)
-                }
-            }
-
-
-            /**
-             * Easy event listener function
-             */
-            const on = (type, el, listener, all = false) => {
-                let selectEl = select(el, all)
-                if (selectEl) {
-                    if (all) {
-                        selectEl.forEach(e => e.addEventListener(type, listener))
-                    } else {
-                        selectEl.addEventListener(type, listener)
-                    }
-                }
-            }
-
-            /**
-             * Easy on scroll event listener 
-             */
-            const onscroll = (el, listener) => {
-                el.addEventListener('scroll', listener)
-            }
-
-            /**
-             * Navbar links active state on scroll
-             */
-            let navbarlinks;
-            window.addEventListener("load", function(event) {
-                navbarlinks = select('#navbar .scrollto', true);
-            });
-            const navbarlinksActive = () => {
-                let position = window.scrollY + 200
-                navbarlinks.forEach(navbarlink => {
-                    if (!navbarlink.hash) return
-                    let section = select(navbarlink.hash)
-                    if (!section) return
-                    if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-                        navbarlink.classList.add('active')
-                    } else {
-                        navbarlink.classList.remove('active')
-                    }
-                })
-            }
-
-            window.addEventListener('load', navbarlinksActive);
-            onscroll(document, navbarlinksActive);
-
-            /**
-             * Scrolls to an element with header offset
-             */
-            const scrollto = (el) => {
-                let elementPos = select(el).offsetTop
-                window.scrollTo({
-                    top: elementPos,
-                    behavior: 'smooth'
-                })
-            }
-
-            /**
-             * Back to top button
-             */
-            let backtotop = select('.back-to-top');
-            if (backtotop) {
-                const toggleBacktotop = () => {
-                    if (window.scrollY > 100) {
-                        backtotop.classList.add('active')
-                    } else {
-                        backtotop.classList.remove('active')
-                    }
-                }
-                window.addEventListener('load', toggleBacktotop)
-                onscroll(document, toggleBacktotop)
-            }
-
-            /**
-             * Mobile nav toggle
-             */
-            on('click', '.mobile-nav-toggle', function(e) {
-                select('body').classList.toggle('mobile-nav-active')
-                this.classList.toggle('bi-list')
-                this.classList.toggle('bi-x')
-            })
-
-            /**
-             * Scrool with ofset on links with a class name .scrollto
-             */
-            window.addEventListener("load", function(event) {
-                on('click', '.scrollto', function(e) {
-                    if (select(this.hash)) {
-                        e.preventDefault()
-                        let body = select('body')
-                        if (body.classList.contains('mobile-nav-active')) {
-                            body.classList.remove('mobile-nav-active')
-                            let navbarToggle = select('.mobile-nav-toggle')
-                            navbarToggle.classList.toggle('bi-list')
-                            navbarToggle.classList.toggle('bi-x')
-                        }
-                        scrollto(this.hash)
-                    }
-                }, true)
-            });
-            /**
-             * Scroll with ofset on page load with hash links in the url
-             */
-            window.addEventListener('load', () => {
-                if (window.location.hash) {
-                    if (select(window.location.hash)) {
-                        scrollto(window.location.hash)
-                    }
-                }
-            });
-            /*WINDOW PRELOADER*/
-            // let preloader = select('#preloader');
-            // // window.addEventListener("load", function(event) {
-            // //     preloader = select('#preloader');
-            // // });
-            // if (preloader) {
-            //     window.addEventListener('load', () => {
-            //         preloader.remove()
-            //     });
-            // }
-        })());
-    </script>
-    <script>
-        ! function(l) {
-            function e(e) {
-                for (var r, t, n = e[0], o = e[1], u = e[2], f = 0, i = []; f < n.length; f++) t = n[f], p[t] && i.push(p[t][0]), p[t] = 0;
-                for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (l[r] = o[r]);
-                for (s && s(e); i.length;) i.shift()();
-                return c.push.apply(c, u || []), a()
-            }
-
-            function a() {
-                for (var e, r = 0; r < c.length; r++) {
-                    for (var t = c[r], n = !0, o = 1; o < t.length; o++) {
-                        var u = t[o];
-                        0 !== p[u] && (n = !1)
-                    }
-                    n && (c.splice(r--, 1), e = f(f.s = t[0]))
-                }
-                return e
-            }
-            var t = {},
-                p = {
-                    2: 0
-                },
-                c = [];
-
-            function f(e) {
-                if (t[e]) return t[e].exports;
-                var r = t[e] = {
-                    i: e,
-                    l: !1,
-                    exports: {}
-                };
-                return l[e].call(r.exports, r, r.exports, f), r.l = !0, r.exports
-            }
-            f.m = l, f.c = t, f.d = function(e, r, t) {
-                f.o(e, r) || Object.defineProperty(e, r, {
-                    enumerable: !0,
-                    get: t
-                })
-            }, f.r = function(e) {
-                "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, f.t = function(r, e) {
-                if (1 & e && (r = f(r)), 8 & e) return r;
-                if (4 & e && "object" == typeof r && r && r.__esModule) return r;
-                var t = Object.create(null);
-                if (f.r(t), Object.defineProperty(t, "default", {
-                        enumerable: !0,
-                        value: r
-                    }), 2 & e && "string" != typeof r)
-                    for (var n in r) f.d(t, n, function(e) {
-                        return r[e]
-                    }.bind(null, n));
-                return t
-            }, f.n = function(e) {
-                var r = e && e.__esModule ? function() {
-                    return e.default
-                } : function() {
-                    return e
-                };
-                return f.d(r, "a", r), r
-            }, f.o = function(e, r) {
-                return Object.prototype.hasOwnProperty.call(e, r)
-            }, f.p = "/";
-            var r = window.webpackJsonp = window.webpackJsonp || [],
-                n = r.push.bind(r);
-            r.push = e, r = r.slice();
-            for (var o = 0; o < r.length; o++) e(r[o]);
-            var s = n;
-            a()
-        }([])
-    </script>
-    <script src="/static/js/1.d1364a7f.chunk.js"></script>
-    <script src="/static/js/main.38c47c7e.chunk.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.min.js" integrity="sha512-5Zo75sFi47jEROGHPhhx+IUh77BJ3W8gweIYENZGMtfbey8rJ0MzYNRponea9NMM62mwaz+Ze8TE1T4iyuKShQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/html.chunk.js' %}"></script>
+    <script src="{% static 'js/1.1f5a5fc3.chunk.js' %}"></script>
+    <script src="{% static 'js/main.2da76fbe.chunk.js' %}"></script>
 </body>
 
 </html>

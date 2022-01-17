@@ -1,9 +1,10 @@
 import *  as authAction from './profileActionTypes';
 
 const innitialState = {
-    profileData: null,
     componentsLoader: false,
     server_error: null,
+    profiles: [],
+    projects: []
 }
 const stateObjectUpdater = (currentStateObject, updatedStateObject) => {
     return {
@@ -22,7 +23,8 @@ const setFetchedProfile = (state, action) => {
     return stateObjectUpdater(state, {
         componentsLoader: false,
         server_error: null,
-        profileData: action.profileData
+        projects: action.projects,
+        profiles: action.profiles
     });
 }
 
@@ -30,13 +32,13 @@ const failedFetchedProfile = (state, action) => {
     return stateObjectUpdater(state, {
         componentsLoader: false,
         server_error: action.server_error,
-        profileData: null
+        projects: null,
+        profiles: null
     });
 }
 
 const profileReducer = (state = innitialState, action) => {
     switch (action.type) {
-        //To be created outside this method
         case authAction.PROFILE_FETCH_STARTED: return profileFetchedStarted(state, action);
         case authAction.PROFILE_FETCHED: return setFetchedProfile(state, action);
         case authAction.PROFILE_FETCH_FAILED: return failedFetchedProfile(state, action);

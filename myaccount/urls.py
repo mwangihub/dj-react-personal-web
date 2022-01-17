@@ -3,6 +3,6 @@ from django.urls import path, include, re_path
 from . import views
 
 urlpatterns = [
-    path('', views.BaseTemplateView.as_view(), name='peter-mwangi'),
-    # re_path('.*', views.BaseTemplateView.as_view(), name='peter-mwangi'),
+    # path("", views.BaseTemplateView.as_view(), name="peter-mwangi"),
+    
 ]

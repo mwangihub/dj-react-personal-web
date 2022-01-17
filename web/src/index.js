@@ -1,6 +1,4 @@
 import './vendor/bootstrap.min.css';
-import './vendor/bootstrap-icons/bootstrap-icons.css';
-import './vendor/boxicons/css/boxicons.min.css';
 import './vendor/App.css';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';

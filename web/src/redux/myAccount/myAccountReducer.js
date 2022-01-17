@@ -7,6 +7,9 @@ const innitialState = {
     reset_pwd: false,
     email: null,
     info: null,
+    accountData:[],
+    accountError:null,
+    accountLoader:false,
 }
 const stateObjectUpdater = (currentStateObject, updatedStateObject) => {
     return {
@@ -54,6 +57,30 @@ const authLogout = (state, action) => {
     });
 }
 
+//AACOUNT DATA
+export const accountDataFetchStarted = (state, action) => {
+    return stateObjectUpdater(state, {
+        accountError: null,
+        accountLoader: true
+    });
+}
+export const accountDataFetched = (state, action) => {
+    return stateObjectUpdater(state, {
+        accountError: null,
+        accountLoader: false,
+        accountData: action.accountData,
+    });
+}
+export const accountDataFetchFailed = (state, action) => {
+    return stateObjectUpdater(state, {
+        accountError: action.accountError,
+        accountLoader: false,
+    });
+}
+
+
+
+
 
 const myAccountReducer = (state = innitialState, action) => {
     switch (action.type) {
@@ -63,6 +90,10 @@ const myAccountReducer = (state = innitialState, action) => {
         case authAction.AUTH_RESET_ACCOUNT: return authResetAccount(state, action);
         case authAction.AUTH_RESET_ACCOUNT_SUCCESS: return authResetAccountSuccess(state, action);
         case authAction.AUTH_LOGOUT: return authLogout(state, action);
+
+        case authAction.ACCOUNT_DATA_FETCH_STARTED: return accountDataFetchStarted(state, action);
+        case authAction.ACCOUNT_DATA_FETCHED: return accountDataFetched(state, action);
+        case authAction.ACCOUNT_DATA_FETCH_FAILED: return accountDataFetchFailed(state, action);
         default: return state;
     }
 }

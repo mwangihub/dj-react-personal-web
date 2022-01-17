@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import MyAccount, MyProfile,Message
+from .models import MyAccount, MyProfile,Message,ProfileImage,ProjectSample
 from .api.forms import UserAdminChangeForm, UserAdminCreationForm
 
 class UserAdmin(BaseUserAdmin):
@@ -22,11 +22,22 @@ class UserAdmin(BaseUserAdmin):
     add_form = UserAdminCreationForm
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ( "email","avatar","phone","address","resume","current",)
+    list_display = ( "email","phone","address","resume",)
     
 class MessageAdmin(admin.ModelAdmin):
     list_display = ( "email","name",'sent_at')
     
+    
+class ProfileImagesAdmin(admin.ModelAdmin):
+    list_display = ("id","profile_img",'uploaded_at')
+    
+class ProjectSampleAdmin(admin.ModelAdmin):
+    list_display = (
+        "project_name","cartegory","client","url","project_date",
+    )
+    
 admin.site.register(MyAccount, UserAdmin)
 admin.site.register(MyProfile, ProfileAdmin)
 admin.site.register(Message, MessageAdmin)
+admin.site.register(ProfileImage, ProfileImagesAdmin)
+admin.site.register(ProjectSample, ProjectSampleAdmin)

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 class Header extends Component {
@@ -14,22 +13,33 @@ class Header extends Component {
                     <li><a href="#resume" className="nav-link scrollto"><i className="bx bx-file-blank" /> <span>Resume</span></a></li>
                     <li><a href="#services" className="nav-link scrollto"><i className="bx bx-server" /> <span>Services</span></a></li>
                     <li><a href="#contact" className="nav-link scrollto"><i className="bx bx-envelope" /> <span>Contact</span></a></li>
+                   
                 </React.Fragment>
             )
         }
         const dashboardNavigationLinks = () => {
-            return (<li><Link className="" style={{ background: 'green', color: "#fff" }} to="/">
-                <i className="bx bx-home" /> <span className='text-white'>Home</span>
-            </Link></li>)
+            return (
+                <li>
+                    <Link className="nav-link scrollto" style={{ background: 'green', color: "#fff" }} to="/">
+                        <i className="bx bx-home" />
+                        <span className='text-white'>Home</span>
+                    </Link>
+                </li>
+            )
         }
         return (
             <header id="header" className="d-flex flex-column justify-content-center">
                 <nav id="navbar" className="navbar nav-menu">
                     <ul>
                         {profile ? navigationLinks() : dashboardNavigationLinks()}
-                        {isAuthenticated ? <li><Link className="" style={{ background: '#e00202', color: "#fff" }} to="/account/authenticated">
-                            <i className="bx bx-user" /> <span className='text-white'>Account</span>
-                        </Link></li> : ''}
+                        {isAuthenticated ?
+                            <li>
+                                <Link className="nav-link scrollto" style={{ background: '#e00202', color: "#fff" }} to="/account/authenticated">
+                                    <i className="bx bx-user" />
+                                    <span className='text-white'>Account</span>
+                                </Link>
+                            </li> :
+                            ''}
                     </ul>
                 </nav>
             </header>

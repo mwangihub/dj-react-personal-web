@@ -1,23 +1,26 @@
 import React, { Component } from 'react'
-import { ProfileConsumer } from '../contextApi';
 import Social from './Social';
 
 export default class Footer extends Component {
     render() {
-        let data = this.props.data;
-        const links = data ? data.links : {}
+        const { profile: { email, first_name, links } } = this.props
         return (
             <footer id="footer">
                 <div className="container">
-                    <h3>{data ? data.first_name : ''}</h3>
-                    <p>For all projects related to<code className='fs-6'> Python, Django, Django REST, ReactJS, React-Native JS, Vanilla JS, HTML, Bootstrap</code> and<code className='fs-6'> CSS </code> contact me.</p>
+                    <h3>{first_name}</h3>
+                    <p>For all projects related to<code className='fs-6'> Python, Django, Django REST, ReactRedux, ReactJS, React-Native, Vanilla JS, HTML, Bootstrap</code> and<code className='fs-6'> CSS </code> contact me.</p>
                     <Social {...links} />
+
+                    <div className="mb-2">
+                        <a href="https://www.digitalocean.com/?refcode=3654e7ea820f&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" >
+                            <img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="DigitalOcean Referral Badge" className='img-fluid'/>
+                        </a>
+                    </div>
+
                     <div className="copyright">
-                        &copy; Copyright <strong><span>Innovest.com</span></strong>. All Rights Reserved
+                        &copy; Copyright <strong><span>{email}</span></strong>. All Rights Reserved
                     </div>
-                    <div className="credits">
-                        Template <a href="https://bootstrapmade.com/">Credits</a>
-                    </div>
+
                 </div>
             </footer>
         )

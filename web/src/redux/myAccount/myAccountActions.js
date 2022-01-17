@@ -2,6 +2,13 @@ import *  as action from './myAccountActionTypes';
 import axios from 'axios';
 import Api from '../../Api';
 
+export const empty_response = {
+    status: "505",
+    statusText: "Internal server Error",
+    info: "Probably the server setup incorrectly"
+}
+
+// AUTHENTICATION 
 export const authStart = () => {
     return {
         type: action.AUTH_START
@@ -78,8 +85,6 @@ export const handleLoginEmail = (email, password) => {
         Api.sendLoginRequest({ email, password })
             .then(r => {
                 let res = r.data
-                console.log(r);
-                console.log("Data", r.data);
                 //pmwangij9@gmail.com
                 const token = res.token ? res.token : null;
                 const email = res.email ? res.email : null;
@@ -152,3 +157,46 @@ export const checkTokenState = () => {
         }
     }
 }
+
+// ACCOUNT DATA
+export const accountDataFetchStarted = () => {
+    return {
+        type: action.ACCOUNT_DATA_FETCH_STARTED
+    }
+}
+export const accountDataFetched = accountData => {
+    return {
+        type: action.ACCOUNT_DATA_FETCHED,
+        accountData: accountData
+    }
+}
+export const accountDataFetchFailed = accountFetchError => {
+    return {
+        type: action.ACCOUNT_DATA_FETCH_FAILED,
+        accountFetchError: accountFetchError
+    }
+}
+
+export const fetchAccountData = () => {
+    return dispatch => {
+        dispatch(accountDataFetchStarted());
+        const token = localStorage.getItem('token');
+        Api.sendAccountRequest(token)
+            .then(r => {
+                if (r.status === 200) {
+                    dispatch(accountDataFetched(r.data));
+                }
+            })
+            .catch(error => {
+                if (error.response) {
+                    dispatch(accountDataFetchFailed(error.response))
+                } else if (error.request) {
+                    empty_response['info'] = "Server is down for now, no response received"
+                    dispatch(accountDataFetchFailed(empty_response))
+                } else {
+                    dispatch(accountDataFetchFailed(empty_response))
+                }
+                // console.log(error.config);
+            });
+    }
+};

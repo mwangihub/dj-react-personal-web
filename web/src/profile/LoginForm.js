@@ -8,7 +8,7 @@ const stateObject = {
     message: null,
     reset_pwd: false,
     alert: 'info',
-    loading: false,
+    custom_loading: false,
     noInputResponse: null,
 }
 class LoginForm extends Component {
@@ -25,20 +25,25 @@ class LoginForm extends Component {
     handleNoInputChange = event => {
         let data = event.target.value;
         if (data) {
-            this.setState({ loading: true });
+            this.setState({ custom_loading: true });
         }
         Api.sendNoInputData(data).then(r => {
-            r.status === 200 ? this.setState({ authenticate: true, testedEmail: r.data.email }) : this.setState({ authenticate: false });
+            r.data.email ?
+                this.setState({ authenticate: true, testedEmail: r.data.email }) :
+                this.setState({ authenticate: false });
+            if (r.data.noData) {
+                setTimeout(() => { this.setState({ custom_loading: false, noInputResponse: r.data.info }); }, 3000);
+            }
         }).catch(error => {
             if (error.response) {
                 let res = error.response;
                 if (res.status === 404) {
-                    setTimeout(() => { this.setState({ loading: false, noInputResponse: res.data.info }); }, 3000);
+                    setTimeout(() => { this.setState({ custom_loading: false, noInputResponse: res.data.info }); }, 3000);
                 }
             } else if (error.request) {
-                setTimeout(() => { this.setState({ loading: false }); }, 3000);
+                setTimeout(() => { this.setState({ custom_loading: false }); }, 3000);
             } else {
-                setTimeout(() => { this.setState({ loading: false }); }, 3000);
+                setTimeout(() => { this.setState({ custom_loading: false }); }, 3000);
             }
         });
     }
@@ -77,11 +82,9 @@ class LoginForm extends Component {
         }, 1000);
     }
 
-
-
     render() {
-        let { authenticate, loading, testedEmail, alert, noInputResponse } = this.state;
-        const { isAuthenticated, email, reset_pwd, info } = this.props;
+        let { authenticate, custom_loading, testedEmail, alert, noInputResponse } = this.state;
+        const { isAuthenticated, email, reset_pwd, info, loading } = this.props;
 
         const loginForm = () => {
             // If email is valid
@@ -121,7 +124,7 @@ class LoginForm extends Component {
                                 id="any_input"
                                 onChange={this.handleNoInputChange} />
                         </div>
-                        {loading ? <div className="loading"><span>Loading ...</span> </div> : ''}
+                        {custom_loading ? <div className="loading"><span>Loading ...</span> </div> : ''}
                         {noInputResponse ? <div className="text-center">{noInputResponse}</div> : ''}
                     </form>)
             }
@@ -152,10 +155,14 @@ class LoginForm extends Component {
                         </div> : ''
                 }
                 {reset_pwd ? reset_psswd() : ''}
-                {isAuthenticated ? <small className="text-success">
-                    You are authenticated with {email}
-                    <button onClick={this.handleLogOut} className="btn btn-sm btn-outline-warning ms-2 my-2">Log Out</button>
-                </small> : ''}
+                {isAuthenticated ?
+                    <small className="text-success">
+                        {email}
+                        <button onClick={this.handleLogOut}
+                            className="btn btn-sm btn-outline-warning ms-2 my-2">Log Out
+                        </button>
+                    </small> :
+                    ''}
                 {loginForm()}
             </div>
         )

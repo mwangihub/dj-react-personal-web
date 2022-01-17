@@ -7,8 +7,10 @@ SECRET_KEY = os.environ.get(
     "django-insecure-&p0it7ja(4#-424n45x!@#bsivno*!3f%5!$gdwo3!v7ha5h*b",
 )
 DEBUG = str(os.environ.get("DEBUG")) == "1"
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost"]
+print(DEBUG)
 if not DEBUG:
+    # https://portfolio-web-mobuq.ondigitalocean.app
     ALLOWED_HOSTS += [
         os.environ.get("DJANGO_ALLOWED_HOST"),
     ]
@@ -26,12 +28,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
     "storages",
-    
     "myaccount",
 ]
 MIDDLEWARE = [
@@ -131,28 +131,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media-cdn"
 from .cdn.conf import *
-# from .cdn.conf import (
-#     AWS_ACCESS_KEY_ID,
-#     AWS_SECRET_ACCESS_KEY,
-#     AWS_STORAGE_BUCKET_NAME,
-#     AWS_S3_ENDPOINT_URL,
-#     AWS_S3_OBJECT_PARAMETERS,
-#     AWS_LOCATION,
-#     DEFAULT_FILE_STORAGE,
-#     STATICFILE_STORAGE,
-# )
-
-# AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
-# AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
-# AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME
-# AWS_S3_ENDPOINT_URL = AWS_S3_ENDPOINT_URL
-# AWS_S3_OBJECT_PARAMETERS = AWS_S3_OBJECT_PARAMETERS
-# AWS_LOCATION = AWS_LOCATION
-# DEFAULT_FILE_STORAGE = DEFAULT_FILE_STORAGE
-# STATICFILE_STORAGE = STATICFILE_STORAGE
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://192.168.0.159:3000"]
 CORS_ORIGIN_ALLOW_ALL = False
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND

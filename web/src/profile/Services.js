@@ -1,67 +1,50 @@
 import React, { Component } from 'react'
-import { ProfileConsumer } from '../contextApi';
-const Servive = ({ openModal, details }) => {
-    return (
-        <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 ">
-            <div className="icon-box iconbox-yellow" onClick={e => openModal()}>
-                <div className="icon" >
-                    <i className="bx bx-layer" />
-                </div>
-                <h4>Django-React Intergration</h4>
-                <p>Simple app that intergrates Django and React.</p>
-            </div>
+import ServicesPortfolio from './ServicesPortfolio'
 
-        </div>
-    )
-}
-export default class Services extends Component {
+class Services extends Component {
     constructor(props) {
         super(props)
+
         this.state = {
-            details: null,
-            modalOpen: false
+            project: null
         }
     }
-    openModal = () => {
+    openModal = project => {
         let viewService = document.querySelector("#viewService");
         viewService.style.display = "flex";
+        this.setState({ project })
     }
-    closeModal = event => {
-        let
-            viewService = document.querySelector("#viewService"),
-            serviceCodeSample = document.querySelector("#serviceCodeSample");
-        serviceCodeSample.className += " out";
-        setTimeout(function () {
-            viewService.style.display = "none";
-            serviceCodeSample.classList.remove("out")
-        }, 400);
-    }
+
     render() {
-        const { modalOpen, details } = this.state;
-        const properties = {
-            openModal: this.openModal,
-            details: details
-        }
+        const projects = this.props
+        const { project } = this.state
         return (
             <section id="services" className="services">
                 <div className="container " >
                     <div className="section-title"><h2>Services</h2></div>
-                    <p>Working closely with my clients and small teams, I use Django to produce outstanding, high performing and secure custom websites with unique and professional web design. If your project requires, to use python framework and Java script I ensure that your goals are met in time.</p>
-                    <p>Check my github account for more projects. Most repos are private.</p>
+                    <p>Working closely with my clients and small teams, I use Django to produce outstanding, high performing and secure custom websites with unique and professional web design.</p>
+                    <p>Check my github account for more projects. Most of my repositories are private and that is for good reasons.</p>
                     <div className="row" id="allServices position-relative">
-                        <Servive {...properties} />
-                        <Servive {...properties} />
+                        {
+                            projects && Object.keys(projects).map((project, i) => {
+                                return (
+                                    <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 " key={i}>
+                                        <div className="icon-box iconbox-yellow" onClick={e => this.openModal(projects[i])}>
+                                            <div className="icon" >
+                                                <i className="bx bxl-dribbble" />
+                                            </div>
+                                            <h4>{projects[i].project_name}</h4>
+                                            <p>{projects[i].brief.substring(0, 100)}...</p>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
-                    <div id="viewService" className="viewService">
-                        <div id="serviceCodeSample" className="serviceCodeSample mb-4 bg-light rounded-3">
-                            <div className="container-fluid ">
-                                <h1 className="display-6 fw-bold">Custom jumbotron</h1>
-                            </div>
-                        </div>
-                        <button id="closeModal" className="btn btn-sm btn-primary px-5" onClick={e => this.closeModal(e)}>Close</button>
-                    </div>
+                    <ServicesPortfolio {...project} />
                 </div>
             </section>
         )
     }
 }
+export default Services

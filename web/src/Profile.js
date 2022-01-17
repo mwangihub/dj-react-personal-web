@@ -15,13 +15,12 @@ class Profile extends Component {
     componentDidMount() {
         this.props.fetchProfile()
     }
-    render() {
-        const error = this.props.server_error ? this.props.server_error : null;
-        const loader = this.props.loading ? this.props.loading : false;
 
+    render() {
+        const { loading, server_error, projects } = this.props;
         return (
-            error ?
-                <ErrorPage {...error} /> :
+            server_error ?
+                <ErrorPage {...server_error} /> :
                 <React.Fragment>
                     <LoginForm />
                     <Header profile={true} />
@@ -30,20 +29,23 @@ class Profile extends Component {
                         <About {...this.props} />
                         <Skills />
                         <Resume {...this.props} />
-                        <Services />
+                        <Services {...projects} />
                         <Contact {...this.props} />
+                        <Footer {...this.props} />
                     </main>
-                    <Footer {...this.props} />
-                    {loader ? <div id="preloader"></div> : ''}
+                    {loading ? <div id="preloader"></div> : ''}
                 </React.Fragment>
         )
     }
 }
 const mapStateToProps = state => {
+    const { profile: { profiles, projects, componentsLoader, server_error } } = state;
     return {
-        data: state.profile.profileData,
-        loading: state.profile.componentsLoader,
-        server_error: state.profile.server_error,
+        profile: profiles.length > 0 ? profiles[0] : {},
+        loading: componentsLoader,
+        server_error: server_error,
+        projects: projects,
+        // profiles: profiles
     }
 }
 const mapDispatchToProps = dispatch => {

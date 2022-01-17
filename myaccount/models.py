@@ -1,9 +1,29 @@
+import pathlib
+import uuid
 from django.db import models
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+
+
+def file_path(instance, filename):
+    img_path = pathlib.Path(filename)
+    name = str(uuid.uuid1())
+    return f"{instance.__class__.__name__}/{name}{img_path.suffix}"
+
+
+class ProjectSample(models.Model):
+    project_name = models.CharField(max_length=255)
+    cartegory = models.CharField(max_length=255)
+    client = models.CharField(max_length=255)
+    url = models.CharField(max_length=255)
+    brief = models.TextField()
+    project_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.project_name}"
 
 
 class Message(models.Model):
-    email = models.EmailField(verbose_name='message email', max_length=255)
+    email = models.EmailField(verbose_name="message email", max_length=255)
     name = models.CharField(max_length=255)
     message = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)
@@ -13,21 +33,17 @@ class Message(models.Model):
 
 
 class MyProfile(models.Model):
-    email = models.EmailField(default='pmwassini@gmail.com',
-                              verbose_name='email address',
-                              max_length=255,
-                              unique=True)
-    avatar = models.ImageField(upload_to="media/profile/avatars/",
-                               null=True,
-                               blank=True)
-    phone = models.CharField(max_length=13, default='+254796487662')
-    address = models.CharField(max_length=50, default='Nakuru, Kenya')
-    resume = models.FileField(upload_to="media/profile/resumes",
-                              null=True,
-                              blank=True)
+    email = models.EmailField(
+        default="pmwassini@gmail.com",
+        verbose_name="email address",
+        max_length=255,
+        unique=True,
+    )
+    phone = models.CharField(max_length=13, default="+254796487662")
+    address = models.CharField(max_length=50, default="Nakuru, Kenya")
+    resume = models.FileField(upload_to="media/profile/resumes", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    current = models.BooleanField(default=False)
 
     def __str__(self):
         return self.email
@@ -42,8 +58,10 @@ class MyProfile(models.Model):
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
         if not email:
-            raise ValueError('Email address must be set')
-        user = self.model(email=self.normalize_email(email), )
+            raise ValueError("Email address must be set")
+        user = self.model(
+            email=self.normalize_email(email),
+        )
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -67,29 +85,33 @@ class UserManager(BaseUserManager):
 
 
 class MyAccount(AbstractBaseUser):
-    '''
-    this my account
-    '''
-    email = models.EmailField(default='pmwassini@gmail.com',
-                              verbose_name='email address',
-                              max_length=255,
-                              unique=True)
+    """
+    Modified User account to suit special authorization and uthentication
+    """
+    email = models.EmailField(
+        default="pmwassini@gmail.com",
+        verbose_name="email address",
+        max_length=255,
+        unique=True,
+    )
     first_name = models.CharField(
-        default='Peter Mwangi',
-        verbose_name='first name',
+        default="Peter Mwangi",
+        verbose_name="first name",
         max_length=255,
     )
     last_name = models.CharField(
-        default='Maina',
-        verbose_name='last name',
+        default="Maina",
+        verbose_name="last name",
         max_length=255,
     )
-    token = models.CharField(verbose_name="custom auth token", max_length=50, blank=True, null=True)
+    token = models.CharField(
+        verbose_name="custom auth token", max_length=50, blank=True, null=True
+    )
     active = models.BooleanField(default=False)
     staff = models.BooleanField(default=True)
     admin = models.BooleanField(default=True)
     objects = UserManager()
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     def get_full_name(self):
@@ -99,7 +121,7 @@ class MyAccount(AbstractBaseUser):
         return self.email
 
     def __str__(self):
-        return self.email
+        return f"{self.email}"
 
     def has_perm(self, perm, obj=None):
         return True
@@ -124,3 +146,10 @@ class MyAccount(AbstractBaseUser):
     @property
     def is_admin(self):
         return self.admin
+
+
+class ProfileImage(models.Model):
+    profile_img = models.ImageField(
+        upload_to=file_path, height_field=None, width_field=None, max_length=None
+    )
+    uploaded_at = models.DateTimeField(auto_now_add=True)
