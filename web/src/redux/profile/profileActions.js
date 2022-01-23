@@ -11,11 +11,12 @@ export const profileFetchedStarted = () => {
         type: action.PROFILE_FETCH_STARTED
     }
 }
-export const setFetchedProfile = (profiles, projects) => {
+export const setFetchedProfile = (profiles, projects, profileImages) => {
     return {
         type: action.PROFILE_FETCHED,
         projects: projects,
-        profiles: profiles
+        profiles: profiles,
+        profileImages: profileImages
     }
 }
 export const failedFetchedProfile = server_error => {
@@ -31,7 +32,9 @@ export const fetchProfile = () => {
         Api.getProfile()
             .then(r => {
                 if (r.status === 200) {
-                    dispatch(setFetchedProfile(r.data.profiles, r.data.projects));
+                    const profile = r.data.profiles[0]
+                    const profileImages = r.data.profileImages
+                    dispatch(setFetchedProfile(profile, r.data.projects, profileImages));
                 }
             })
             .catch(error => {

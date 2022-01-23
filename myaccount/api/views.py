@@ -30,7 +30,7 @@ from .serializers import (
     ProfileSerializer,
     ProfileImageSerializer,
     ProjectSampleSerializer,
-    ProfileImageCreateSerializer
+    ProfileImageCreateSerializer,
 )
 from core.methods import send_mass_mail
 
@@ -39,6 +39,7 @@ class AdminProfileImageAPIView(views.APIView):
     """
     APIView that creates Profile Images through post. User mut be authenticated
     """
+
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
@@ -50,7 +51,9 @@ class AdminProfileImageAPIView(views.APIView):
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({"info": "Unauthorized user"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"info": "Unauthorized user"}, status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 # GENERAL APIS
@@ -131,6 +134,8 @@ class MyAccountAPIView(views.APIView):
         context = {"request": request}
         account = MyAccount.objects.all()
         projects = ProjectSample.objects.all()
+        imgs = ProfileImage.objects.all()
+        serializer_imgs = ProfileImageSerializer(imgs, many=True, context=context)
         serializer_account = MyAccountSerializer(account, many=True, context=context)
         serializer_projects = ProjectSampleSerializer(
             projects, many=True, context=context
@@ -138,6 +143,7 @@ class MyAccountAPIView(views.APIView):
         data = {
             "profiles": serializer_account.data,
             "projects": serializer_projects.data,
+            "profileImages": serializer_imgs.data,
         }
 
         return Response(data, status=status.HTTP_200_OK)
@@ -236,8 +242,6 @@ class AdminAccountAPIView(views.APIView):
 
 
 # Password Reset
-
-
 class ResetPasswordAPIView(views.APIView):
     """
     APIView that receives post request for password reset.
@@ -295,7 +299,6 @@ class ResetPasswordConfirmAPIView(views.APIView):
     def post(self, request, format=None):
         UserModel = get_user_model()
         data = request.data
-
         #    def post(self, request, uidb64=None, token=None, *arg, **kwargs):
         #     """
         #     View that checks the hash in a password reset link and presents a

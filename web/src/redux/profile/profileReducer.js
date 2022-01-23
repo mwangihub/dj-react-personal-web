@@ -3,8 +3,9 @@ import *  as authAction from './profileActionTypes';
 const innitialState = {
     componentsLoader: false,
     server_error: null,
-    profiles: [],
-    projects: []
+    profiles: {},
+    projects: [],
+    profileImages: []
 }
 const stateObjectUpdater = (currentStateObject, updatedStateObject) => {
     return {
@@ -24,7 +25,8 @@ const setFetchedProfile = (state, action) => {
         componentsLoader: false,
         server_error: null,
         projects: action.projects,
-        profiles: action.profiles
+        profiles: action.profiles,
+        profileImages: action.profileImages
     });
 }
 
@@ -32,8 +34,6 @@ const failedFetchedProfile = (state, action) => {
     return stateObjectUpdater(state, {
         componentsLoader: false,
         server_error: action.server_error,
-        projects: null,
-        profiles: null
     });
 }
 

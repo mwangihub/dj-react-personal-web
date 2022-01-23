@@ -16,7 +16,7 @@ class AccountProfileForms extends Component {
         data.append('profile_img', this.state.selectedFile, this.state.selectedFile.name);
         Api.uploadProfileImage(token, data)
             .then(r => {
-                console.log(r);
+                console.log('');
             })
             .catch(error => {
                 if (error.response) {

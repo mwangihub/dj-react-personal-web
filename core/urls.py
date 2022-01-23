@@ -3,7 +3,6 @@ from django.urls import path, include, re_path
 from django.views import generic
 from myaccount.api.urls import api_patterns
 from myaccount.views import BaseTemplateView
-from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf import settings
 from django.conf.urls.static import static
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './profile/Header';
 import { connect } from 'react-redux';
 import * as myAccountActions from './redux/myAccount/myAccountActions'
-
 import AccountNotAuthenticated from './account/AccountNotAuthenticated';
 import AccountMessages from './account/AccountMessages';
 import AccountProfileForms from './account/AccountProfileForms';

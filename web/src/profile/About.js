@@ -1,8 +1,7 @@
 import React from 'react';
-const About = ({ profile: { first_name, links, images, profiles } }) => {
+const About = ({ profile: { first_name, links, images, profiles }, profileImages }) => {
     const { address, phone, email, } = profiles ? profiles[0] : {}
-    const { profile_img } = images ? images[0] : {}
-
+    const profile_img = profileImages.length > 0 ? profileImages[0].profile_img : '';
     return (
         <section id="about" className="about">
             <div className="container">
@@ -10,7 +9,7 @@ const About = ({ profile: { first_name, links, images, profiles } }) => {
                     <h2>About</h2>
                 </div>
                 <div>
-                    <p>Using best development methodology to deliver Djnago web framework to deliver solutions, I design and build web applications that will meet specific user or business needs. I offers a full compliment of Python related services including: design, development, upgrades, support and maintenance.</p>
+                    <p>Using best development methodology to deliver Django web framework to deliver solutions, I design and build web applications that will meet specific user or business needs. I offers a full compliment of Python related services including: design, development, upgrades, support and maintenance.</p>
                     <div className="col-lg-8">
                         <blockquote className="blockquote">
                             I am a django fullstack web developer. I use ReactJS, HTML and Boostrap to build quality websites.

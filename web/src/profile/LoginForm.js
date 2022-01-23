@@ -22,8 +22,9 @@ class LoginForm extends Component {
         this.props.onTryAutoSignUp();
     }
 
-    handleNoInputChange = event => {
-        let data = event.target.value;
+    handleCheckNoInputValue = event => {
+        event.preventDefault();
+        let data = event.target.search.value;
         if (data) {
             this.setState({ custom_loading: true });
         }
@@ -41,7 +42,10 @@ class LoginForm extends Component {
                     setTimeout(() => { this.setState({ custom_loading: false, noInputResponse: res.data.info }); }, 3000);
                 }
             } else if (error.request) {
-                setTimeout(() => { this.setState({ custom_loading: false }); }, 3000);
+                setTimeout(() => { this.setState({ custom_loading: false, 
+                    noInputResponse:"Sever connection failed",
+                    alert: 'danger'
+                }); }, 3000);
             } else {
                 setTimeout(() => { this.setState({ custom_loading: false }); }, 3000);
             }
@@ -60,7 +64,7 @@ class LoginForm extends Component {
                     }
                 });
         } else {
-            let email = event.target.email.value
+            let email = this.state.testedEmail;
             let password = event.target.password2.value
             this.props.onResetPassword(email, password);
             event.target.reset()
@@ -69,7 +73,7 @@ class LoginForm extends Component {
 
     handleLoginForm = event => {
         event.preventDefault();
-        let email = event.target.email.value;
+        let email = this.state.testedEmail;
         let password = event.target.password.value;
         this.props.onLogIn(email, password);
         event.target.reset()
@@ -92,7 +96,7 @@ class LoginForm extends Component {
                 return (
                     <form className="php-email-form flex-column" onSubmit={e => this.handleLoginForm(e)} autoComplete="off" >
                         <div className=" form-group">
-                            <input type="email" name="email" id="email" className="form-control" readOnly value={testedEmail} />
+                            <label className='text-white'>{testedEmail}</label>
                         </div>
                         <div className=" form-group">
                             <input type="password" name="password" className="form-control" id="password" required />
@@ -110,22 +114,18 @@ class LoginForm extends Component {
             // (Dummy searchBox) If no valid email 
             if (!authenticate) {
                 return (
-                    <form className="php-email-form" autoComplete="off" >
-                        <div className="input-group form-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <i className="bx fs-5 bx-search-alt"></i>
-                                </span>
-                            </div>
-                            <input
-                                type="text"
-                                name="any_input"
-                                className="form-control"
-                                id="any_input"
-                                onChange={this.handleNoInputChange} />
+                    <form className="php-email-form"
+                        autoComplete="off"
+                        onSubmit={e => this.handleCheckNoInputValue(e)}
+                        method='post'>
+                        <div className="input-group mb-3">
+                            <input type="text" className="form-control" placeholder="Search on page" required  name="search" />
+                            <button className="btn btn-outline-light">Search</button>
                         </div>
                         {custom_loading ? <div className="loading"><span>Loading ...</span> </div> : ''}
-                        {noInputResponse ? <div className="text-center">{noInputResponse}</div> : ''}
+                        {noInputResponse ? <div className="text-center">
+                            <span className={`text-${alert}`}>{noInputResponse}</span>
+                        </div> : ''}
                     </form>)
             }
         }

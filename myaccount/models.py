@@ -7,7 +7,8 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 def file_path(instance, filename):
     img_path = pathlib.Path(filename)
     name = str(uuid.uuid1())
-    return f"{instance.__class__.__name__}/{name}{img_path.suffix}"
+    folder = (instance.__class__.__name__).lower()
+    return f"{folder}/{name}{img_path.suffix}"
 
 
 class ProjectSample(models.Model):

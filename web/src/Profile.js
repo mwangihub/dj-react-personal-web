@@ -15,7 +15,6 @@ class Profile extends Component {
     componentDidMount() {
         this.props.fetchProfile()
     }
-
     render() {
         const { loading, server_error, projects } = this.props;
         return (
@@ -39,13 +38,13 @@ class Profile extends Component {
     }
 }
 const mapStateToProps = state => {
-    const { profile: { profiles, projects, componentsLoader, server_error } } = state;
+    const { profile: { profiles, projects, componentsLoader, server_error, profileImages } } = state;
     return {
-        profile: profiles.length > 0 ? profiles[0] : {},
+        profile: profiles,
         loading: componentsLoader,
         server_error: server_error,
         projects: projects,
-        // profiles: profiles
+        profileImages: profileImages,
     }
 }
 const mapDispatchToProps = dispatch => {

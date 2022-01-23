@@ -7,13 +7,14 @@ SECRET_KEY = os.environ.get(
     "django-insecure-&p0it7ja(4#-424n45x!@#bsivno*!3f%5!$gdwo3!v7ha5h*b",
 )
 DEBUG = str(os.environ.get("DEBUG")) == "1"
-ALLOWED_HOSTS = ["localhost"]
-print(DEBUG)
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
 if not DEBUG:
     # https://portfolio-web-mobuq.ondigitalocean.app
     ALLOWED_HOSTS += [
         os.environ.get("DJANGO_ALLOWED_HOST"),
     ]
+
 ALLOWED_MAILS = [
     os.environ.get("MAIL1"),
     os.environ.get("MAIL2"),
@@ -59,6 +60,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -123,17 +125,19 @@ USE_L10N = True
 USE_TZ = True
 # https://personal-web-spaces.nyc3.digitaloceanspaces.com
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "web/pages/static"),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "web/pages/static"),]
 STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media-cdn"
-from .cdn.conf import *
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# from .cdn.conf import *
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://192.168.0.159:3000"]
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get("CORS_ORIGINS1"),
+    os.environ.get("CORS_ORIGINS2"),
+    "http://192.168.0.159:3000"
+    ]
 CORS_ORIGIN_ALLOW_ALL = False
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
