@@ -130,13 +130,12 @@ STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# from .cdn.conf import *
+from .cdn.conf import *
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     os.environ.get("CORS_ORIGINS1"),
     os.environ.get("CORS_ORIGINS2"),
-    "http://192.168.0.159:3000"
     ]
 CORS_ORIGIN_ALLOW_ALL = False
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

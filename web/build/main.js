@@ -29,7 +29,7 @@
     }
 
     /* Navbar links active state on scroll*/
-    let navbarlinks =[];
+    let navbarlinks = [];
     window.addEventListener("load", function (event) {
         navbarlinks = select('#navbar .scrollto', true);
     });
@@ -61,7 +61,7 @@
 
     /* Back to top button*/
     let backtotop = select('.back-to-top');
-    backtotop.onclick = e => {scrollto("#hero")}
+    backtotop.onclick = e =>  scrollto("#hero") 
     if (backtotop) {
         const toggleBacktotop = () => {
             if (window.scrollY > 100) {
