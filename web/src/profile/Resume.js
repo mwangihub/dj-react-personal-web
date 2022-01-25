@@ -10,7 +10,7 @@ const Resume = ({ profile: { first_name, profiles } }) => {
                     <p>Skilled at delivery and maintenance of web software and accustomed to functioning within a team of top-performing developers and IT support experts.</p>
                 </div>
                 <div className="row resume-content">
-                    <div className="col-lg-8">
+                    <div className="col-lg-8" data-aos="fade-right" data-aos-delay="200">
                         <h3 className="resume-title">Sumary</h3>
                         <div className="resume-item pb-0">
                             <h4>{ first_name }</h4>
@@ -32,7 +32,7 @@ const Resume = ({ profile: { first_name, profiles } }) => {
                             <p>Excelled in user experience and user interfaces in Web Applications.</p>
                         </div>
                     </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-8" data-aos="fade-right" data-aos-delay="300">
                         <h3 className="resume-title">Work Experience</h3>
                         <div className="resume-item">
                             <h4>Freelance Web Developer</h4>

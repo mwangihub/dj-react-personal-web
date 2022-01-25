@@ -4,7 +4,7 @@ const About = ({ profile: { first_name, links, images, profiles }, profileImages
     const profile_img = profileImages.length > 0 ? profileImages[0].profile_img : '';
     return (
         <section id="about" className="about">
-            <div className="container" data-aos="fade-up">
+            <div className="container" data-aos="fade-up" data-aos-delay="200">
                 <div className="section-title">
                     <h2>About</h2>
                 </div>
@@ -16,13 +16,13 @@ const About = ({ profile: { first_name, links, images, profiles }, profileImages
                         To obtain a position as a web application developer; specifically with django, in a fun, fast paced, cutting edge environment that promotes teamwork and integrity and that fosters personal and professional development.</p>
                 </div>
                 <div className="row">
-                    <div className="col-lg-4 p-3 img-thumbnail" style={{
+                    <div className="col-lg-4 p-3" style={{
                         backgroundImage: profile_img ? `url("${profile_img}")` : '',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: 'top right',
                         height: "380px"
-                    }}>
+                    }} data-aos="fade-right" data-aos-delay="400">
                     </div>
                     <div className="col-lg-8 pt-4 pt-lg-0 content">
                         <h3>Django Fullstack Web Developer.</h3>

@@ -32,8 +32,7 @@ export default class Skills extends Component {
                         </ul>
                     </div>
                     <div className="row skills-content">
-                        <div className="col-lg-6">
-
+                        <div className="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                             <div className="progress">
                                 <span className="skill">ReactJS <i className="val">90%</i></span>
                                 <div className="progress-bar-wrap">
@@ -53,7 +52,7 @@ export default class Skills extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-lg-6"data-aos="fade-left" data-aos-delay="200">
                             <div className="progress">
                                 <span className="skill">HTML <i className="val">100%</i></span>
                                 <div className="progress-bar-wrap">

@@ -1,7 +1,7 @@
 import axios from "axios";
-
+//http://localhost:8000/api/
 //https://portfolio-web-mobuq.ondigitalocean.app/api/
-let http = (token = null, c_type = "application/json" ) => {
+let http = (token = null, c_type = "application/json") => {
     return axios.create({
         baseURL: "http://localhost:8000/api/",
         headers: {
@@ -55,7 +55,7 @@ const Api = {
     sendMessages,
     sendAccountRequest,
     uploadProfileImage,
-    sendDeleteMessageReuest, 
+    sendDeleteMessageReuest,
     sendDeleteProfileImageReuest
 };
 export default Api

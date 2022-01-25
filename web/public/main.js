@@ -59,28 +59,7 @@
         })
     }
 
-    /* Back to top button*/
-    let backtotop = select('.back-to-top');
-    backtotop.onclick = e =>  scrollto("#hero") 
-    if (backtotop) {
-        const toggleBacktotop = () => {
-            if (window.scrollY > 100) {
-                backtotop.classList.add('active')
-            } else {
-                backtotop.classList.remove('active')
-            }
-        }
-        window.addEventListener('load', toggleBacktotop)
-        onscroll(document, toggleBacktotop)
-    }
-
-    /* Mobile nav toggle*/
-    on('click', '.mobile-nav-toggle', function (e) {
-        select('body ').classList.toggle('mobile-nav-active')
-        this.classList.toggle('bi-list')
-        this.classList.toggle('bi-x')
-    })
-
+   
     /* Scrool with ofset on links with a class name .scrollto*/
     window.addEventListener("load", function (event) {
         on('click', '.scrollto', function (e) {
@@ -157,5 +136,13 @@
           mirror: false
         })
       });
-      
+      /**
+   * Preloader
+   */
+//   let preloader = select('#preloader');
+//   if (preloader) {
+//     window.addEventListener('load', () => {
+//       preloader.remove()
+//     });
+//   }
 })()

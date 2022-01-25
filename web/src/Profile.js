@@ -9,14 +9,27 @@ import Contact from './profile/Contact';
 import Header from './profile/Header';
 import Footer from './profile/Footer';
 import ErrorPage from './profile/ErrorPage';
+import BackToTop from './components/BackToTop';
 import { connect } from 'react-redux';
 import * as profileActions from './redux/profile/profileActions'
+import MenuIcon from './components/MenuIcon';
+
 class Profile extends Component {
+    state = {
+        loading: true,
+    }
     componentDidMount() {
         this.props.fetchProfile()
+        window.addEventListener('load', e => this.generalLoader(e));
+    }
+    generalLoader = e => {
+        setTimeout(() => {
+            this.setState({ loading: false })
+        }, 500);
     }
     render() {
-        const { loading, server_error, projects } = this.props;
+        const { server_error, projects } = this.props;
+        const { loading } = this.state
         return (
             server_error ?
                 <ErrorPage {...server_error} /> :
@@ -28,11 +41,13 @@ class Profile extends Component {
                         <Skills />
                         <Resume {...this.props} />
                         <Services {...projects} />
-                        <DjangoSites/>
+                        <DjangoSites />
                         <Contact {...this.props} />
                         <Footer {...this.props} />
                     </main>
                     {loading ? <div id="preloader"></div> : ''}
+                    <BackToTop />
+                    <MenuIcon />
                 </React.Fragment>
         )
     }

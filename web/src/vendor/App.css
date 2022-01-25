@@ -20,7 +20,7 @@ body {
 
 @media(max-width:576px) {
     body {
-        font-size: 0.9912rem;
+        font-size: 0.8999rem;
     }
 }
 
@@ -452,7 +452,7 @@ p {
     position: fixed;
     visibility: hidden;
     opacity: 0;
-    right: 15px;
+    right: 50px;
     bottom: 15px;
     z-index: 100;
     background: var(--body-th);
@@ -822,7 +822,7 @@ section {
 }
 
 .section-title h2 {
-    font-size: 32px;
+    font-size: calc(1.325rem + .9vw);
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 20px;
