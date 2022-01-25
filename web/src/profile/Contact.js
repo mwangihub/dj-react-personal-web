@@ -78,7 +78,7 @@ export default class Contact extends Component {
         const { loading, error, sent } = this.state;
         return (
             <section id="contact" className="contact">
-                <div className="container">
+                <div className="container" data-aos="fade-up">
                     <div className="section-title">
                         <h2>Contact</h2>
                     </div>

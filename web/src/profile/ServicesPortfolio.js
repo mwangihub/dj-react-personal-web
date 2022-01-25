@@ -11,7 +11,7 @@ class ServicesPortfolio extends Component {
         const handler = e => this.setState({ renderSlider: e.matches });
         window.matchMedia("(max-width: 576px)").addEventListener('change', handler);
     }
-
+    
     closeModal = event => {
         let
             viewService = document.querySelector("#viewService"),
@@ -21,9 +21,11 @@ class ServicesPortfolio extends Component {
             viewService.style.display = "none";
             serviceCodeSample.classList.remove("out")
         }, 400);
+        document.querySelector("body").style.overflow = "visible";
     }
+
     render() {
-        const { brief, cartegory,  project_name,  } = this.props
+        const { brief, cartegory, project_name, client, url } = this.props
         const { renderSlider } = this.state
         return (
             <div id="viewService" className="viewService">
@@ -54,8 +56,8 @@ class ServicesPortfolio extends Component {
                                 <h3>Project information</h3>
                                 <ul>
                                     <li><strong>Category</strong>: {cartegory}</li>
-                                    {/* <li><strong>Client</strong>: {client}</li> */}
-                                    {/* <li><strong>Project URL</strong>: <a href={`${url}`}>{url}</a></li> */}
+                                    <li><strong>Client</strong>: {client}</li>
+                                    <li><strong>Project URL</strong>: <a href={`${url}`}>{url}</a></li>
                                 </ul>
                             </div>
                             <div className="portfolio-description">

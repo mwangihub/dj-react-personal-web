@@ -1,8 +1,9 @@
 import axios from "axios";
-// "multipart/form-data"
+
+//https://portfolio-web-mobuq.ondigitalocean.app/api/
 let http = (token = null, c_type = "application/json" ) => {
     return axios.create({
-        baseURL: "https://portfolio-web-mobuq.ondigitalocean.app/api/",
+        baseURL: "http://localhost:8000/api/",
         headers: {
             "Content-type": c_type,
             Authorization: token ? `Token ${token}` : ''

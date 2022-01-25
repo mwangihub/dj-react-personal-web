@@ -147,7 +147,7 @@ class LoginForm extends Component {
             )
         }
         return (
-            <div id="no-input" className="container contact">
+            <div id="no-input" className="container contact" data-aos="fade-up">
                 {
                     info != null ?
                         <div className="form-group">

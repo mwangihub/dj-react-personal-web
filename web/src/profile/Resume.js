@@ -4,7 +4,7 @@ const Resume = ({ profile: { first_name, profiles } }) => {
     const { address, phone, email, } = profiles ? profiles[0] : {}
     return (
         <section id="resume" className="resume">
-            <div className="container">
+            <div className="container " data-aos="fade-up">
                 <div className="section-title">
                     <h2>Resume</h2>
                     <p>Skilled at delivery and maintenance of web software and accustomed to functioning within a team of top-performing developers and IT support experts.</p>

@@ -33,7 +33,7 @@ class ProfileImagesAdmin(admin.ModelAdmin):
     
 class ProjectSampleAdmin(admin.ModelAdmin):
     list_display = (
-        "project_name","cartegory","client","url","project_date",
+        "project_name","cartegory","client","url","project_date","profileimage","icon",
     )
     
 admin.site.register(MyAccount, UserAdmin)

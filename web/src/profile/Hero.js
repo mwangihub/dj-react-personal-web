@@ -9,9 +9,10 @@ const Hero = ({ profile: { first_name, links }, profileImages }) => {
             backgroundSize: 'cover',
             backgroundPosition: 'top right',
         }}>
-            <div className="container">
+            <div className="container" data-aos="zoom-in" data-aos-delay="100">
                 <h1>{first_name ? first_name : ''}</h1>
                 <Social {...links} />
+                <small className='text-dark'>Django / ReactJS Web Development Services. Rates upwards of $10 per hour. (Ksh. 1,100 +)</small>
             </div>
         </section>
     )

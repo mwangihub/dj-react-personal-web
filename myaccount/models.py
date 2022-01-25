@@ -16,6 +16,10 @@ class ProjectSample(models.Model):
     cartegory = models.CharField(max_length=255)
     client = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
+    icon = models.CharField(max_length=255, default="react")
+    profileimage = models.ImageField(
+        upload_to=file_path, height_field=None, width_field=None, max_length=None
+    )
     brief = models.TextField()
     project_date = models.DateTimeField(auto_now_add=True)
 

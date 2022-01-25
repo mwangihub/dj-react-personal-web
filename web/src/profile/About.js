@@ -4,21 +4,16 @@ const About = ({ profile: { first_name, links, images, profiles }, profileImages
     const profile_img = profileImages.length > 0 ? profileImages[0].profile_img : '';
     return (
         <section id="about" className="about">
-            <div className="container">
+            <div className="container" data-aos="fade-up">
                 <div className="section-title">
                     <h2>About</h2>
                 </div>
                 <div>
-                    <p>Using best development methodology to deliver Django web framework to deliver solutions, I design and build web applications that will meet specific user or business needs. I offers a full compliment of Python related services including: design, development, upgrades, support and maintenance.</p>
-                    <div className="col-lg-8">
-                        <blockquote className="blockquote">
-                            I am a django fullstack web developer. I use ReactJS, HTML and Boostrap to build quality websites.
-                        </blockquote>
-                    </div>
-                    <h4>Objective</h4>
+                    <p>Using best development methodology to deliver web application solutions, I design and build web applications that will meet specific client's needs. I offer a full compliment of Python related services including: design, development, upgrades, support and maintenance.</p>
+                    
+                    <h4 className='mt-4'>My Objective</h4>
                     <p>
-                        To obtain a position as a web application developer in a fun, fast paced, cutting edge environment that
-                        promotes teamwork and integrity and that fosters personal and professional development.</p>
+                        To obtain a position as a web application developer; specifically with django, in a fun, fast paced, cutting edge environment that promotes teamwork and integrity and that fosters personal and professional development.</p>
                 </div>
                 <div className="row">
                     <div className="col-lg-4 p-3 img-thumbnail" style={{
@@ -48,6 +43,9 @@ const About = ({ profile: { first_name, links, images, profiles }, profileImages
                                 </ul>
                             </div>
                         </div>
+                        <p>
+                            For more than three years as django web developer, I am self-assured individual with enough experience to offer. Flexible and poised promoting well-developed skills in Full-stack Development, acquired through high level training in various technology envirionments.
+                        </p>
                     </div>
                 </div>
             </div>

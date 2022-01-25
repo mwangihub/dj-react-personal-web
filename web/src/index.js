@@ -1,3 +1,5 @@
+import './vendor/aos.css';
+import './vendor/swiper-bundle.min.css';
 import './vendor/bootstrap.min.css';
 import './vendor/App.css';
 import { BrowserRouter } from 'react-router-dom';
