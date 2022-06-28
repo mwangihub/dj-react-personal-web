@@ -4,7 +4,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
-    "django-insecure-&p0it7ja(4#-424n45x!@#bsivno*!3f%5!$gdwo3!v7ha5h*b",
+    "",
 )
 DEBUG = str(os.environ.get("DEBUG")) == "1"
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
